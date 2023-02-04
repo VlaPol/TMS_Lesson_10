@@ -36,7 +36,7 @@ public class Lesson10Test {
                     System.out.print("Input card number (16 digit necessary!): ");
                     String inputString = sc.nextLine();
                     System.out.print("Result: ");
-                    System.out.println(StringUtils.getSecureCardNumber(inputString));
+                    System.out.println(StringUtils.getSecureCardNumber(inputString.trim()));
                 }
                 case 3 -> {
                     System.out.print("Input name: ");
@@ -45,25 +45,25 @@ public class Lesson10Test {
                     String surname = sc.nextLine();
                     System.out.print("Input patronymic if necessary or press enter: ");
                     String patronymic = sc.nextLine();
-                    System.out.println(StringUtils.getSignature(name, surname, patronymic));
+                    System.out.println(StringUtils.getSignature(name.trim(), surname.trim(), patronymic.trim()));
                 }
                 case 4 -> {
                     System.out.print("Input passport number: ");
                     String number = sc.nextLine();
                     System.out.println("Are input number [" + number + "] a Belarusian passport? ->"
-                        + StringUtils.isBelarusPassport(number));
+                            + StringUtils.isBelarusPassport(number.trim()));
                 }
                 case 5 -> {
                     System.out.print("Input preferred password: ");
                     String password = sc.nextLine();
                     System.out.println("Are this password [" + password + "] is strong? -> "
-                            + StringUtils.isStrongPassword(password));
+                            + StringUtils.isStrongPassword(password.trim()));
                 }
                 case 6 -> {
                     System.out.print("Input email address: ");
                     String email = sc.nextLine();
-                    System.out.println("Are input string [" + email + "] is email? -> "
-                            + StringUtils.isEmail(email));
+                    System.out.println("Are input string [" + email.trim() + "] is email? -> "
+                            + StringUtils.isEmail(email.trim()));
                 }
                 case 0 -> {
                     System.out.println("See you!!!");

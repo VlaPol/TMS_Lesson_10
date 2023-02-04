@@ -1,4 +1,5 @@
 package by.tms.lesson10.homework.utils;
+
 public class StringUtils {
 
     public static String getStringWithoutSpareSpaces(String inputString) {
@@ -24,13 +25,11 @@ public class StringUtils {
 
     public static String getSecureCardNumber(String inputString) {
 
-        String tmpString = inputString.trim();
-
-        if (tmpString.length() != 16) {
+        if (inputString.length() != 16) {
             throw new IllegalArgumentException("Bad card number!");
         }
 
-        char[] stringArrayToChar = tmpString.toCharArray();
+        char[] stringArrayToChar = inputString.toCharArray();
         char[] secureCardNumber = new char[stringArrayToChar.length + 3];
 
         int numberCounter = 1;
@@ -54,13 +53,13 @@ public class StringUtils {
 
     public static String getSignature(String surname, String name, String patronymic) {
 
-        if (surname.trim().length() == 0 || name.trim().length() == 0) {
+        if (surname.length() == 0 || name.length() == 0) {
             throw new IllegalArgumentException("Surname and name are required!");
         }
 
         String nameAndSurname = getPreparedString(surname) + ' ' + getPreparedString(name).charAt(0) + ".";
 
-        if (patronymic.trim().length() != 0) {
+        if (patronymic.length() != 0) {
             return nameAndSurname + ' ' + getPreparedString(patronymic).charAt(0) + '.';
         }
         return nameAndSurname;
@@ -68,7 +67,7 @@ public class StringUtils {
 
     public static boolean isBelarusPassport(String inputString) {
 
-        if (inputString.trim().length() != 9) {
+        if (inputString.length() != 9) {
             return false;
         }
 
