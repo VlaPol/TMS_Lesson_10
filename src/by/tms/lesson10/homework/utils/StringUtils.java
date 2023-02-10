@@ -39,7 +39,7 @@ public class StringUtils {
             if (numberCounter % 5 == 0) {
                 secureCardNumber[i] = ' ';
             } else {
-                if (i < secureCardNumber.length - 4) {
+                if (i < secureCardNumber.length - meaningNumbers) {
                     secureCardNumber[i] = '*';
                 } else {
                     secureCardNumber[i] = stringArrayToChar[stringArrayToChar.length - meaningNumbers];
@@ -78,7 +78,7 @@ public class StringUtils {
         }
 
         for (int i = 2; i < stringToCharArray.length; i++) {
-            if (!Character.isDigit(stringToCharArray[i])) {
+            if (stringToCharArray[i] < '0' && stringToCharArray[i] > '9') {
                 return false;
             }
         }
@@ -99,9 +99,9 @@ public class StringUtils {
         boolean hasLowerLetter = false;
 
         for (char c : stringToChar) {
-            if (isLatinOrCyrillicUpperCase(c)) hasUpperLetter = true;
-            if (isLatinOrCyrillicLowerCase(c)) hasLowerLetter = true;
-            if (Character.isDigit(c)) hasDigit = true;
+            if (!hasUpperLetter && isLatinOrCyrillicUpperCase(c)) hasUpperLetter = true;
+            if (!hasLowerLetter && isLatinOrCyrillicLowerCase(c)) hasLowerLetter = true;
+            if (!hasDigit && Character.isDigit(c)) hasDigit = true;
 
             if (hasDigit && hasLowerLetter && hasUpperLetter) {
                 return true;
@@ -112,9 +112,11 @@ public class StringUtils {
 
     public static boolean isEmail(String inputString) {
 
-        if (inputString.contains("@") && (inputString.indexOf('@') == inputString.lastIndexOf('@'))
+        int adIndex = inputString.indexOf('@');
+
+        if (inputString.contains("@") && (adIndex == inputString.lastIndexOf('@'))
                 && !inputString.contains(" ")) {
-            return inputString.indexOf('@') < inputString.length() - 1 && inputString.indexOf('@') > 0;
+            return adIndex < inputString.length() - 1 && adIndex > 0;
         }
         return false;
     }
