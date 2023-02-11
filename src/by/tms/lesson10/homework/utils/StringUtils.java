@@ -2,6 +2,10 @@ package by.tms.lesson10.homework.utils;
 
 public class StringUtils {
 
+    private static final int cardNumber = 16;
+    private static final int belPassportCodeLength = 9;
+
+
     public static String getStringWithoutSpareSpaces(String inputString) {
 
         if (inputString.length() == 0) return inputString;
@@ -25,30 +29,14 @@ public class StringUtils {
 
     public static String getSecureCardNumber(String inputString) {
 
-        if (inputString.length() != 16) {
+        if (inputString.length() != cardNumber) {
             throw new IllegalArgumentException("Bad card number!");
         }
 
-        char[] stringArrayToChar = inputString.toCharArray();
-        char[] secureCardNumber = new char[stringArrayToChar.length + 3];
+        String securedPart = "**** **** **** ";
+        String visiblePart = inputString.substring(12,cardNumber);
 
-        int numberCounter = 1;
-        int meaningNumbers = 4;
-
-        for (int i = 0; i < secureCardNumber.length; i++) {
-            if (numberCounter % 5 == 0) {
-                secureCardNumber[i] = ' ';
-            } else {
-                if (i < secureCardNumber.length - meaningNumbers) {
-                    secureCardNumber[i] = '*';
-                } else {
-                    secureCardNumber[i] = stringArrayToChar[stringArrayToChar.length - meaningNumbers];
-                    meaningNumbers--;
-                }
-            }
-            numberCounter++;
-        }
-        return new String(secureCardNumber);
+        return securedPart + visiblePart;
     }
 
     public static String getSignature(String surname, String name, String patronymic) {
@@ -67,7 +55,7 @@ public class StringUtils {
 
     public static boolean isBelarusPassport(String inputString) {
 
-        if (inputString.length() != 9) {
+        if (inputString.length() != belPassportCodeLength) {
             return false;
         }
 
@@ -114,8 +102,7 @@ public class StringUtils {
 
         int adIndex = inputString.indexOf('@');
 
-        if (inputString.contains("@") && (adIndex == inputString.lastIndexOf('@'))
-                && !inputString.contains(" ")) {
+        if (adIndex != 0 && (adIndex == inputString.lastIndexOf('@')) && !inputString.contains(" ")) {
             return adIndex < inputString.length() - 1 && adIndex > 0;
         }
         return false;
